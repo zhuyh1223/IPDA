@@ -1,0 +1,30 @@
+model: 'khartoum'
+network: 'ro_34'
+task: 'snake'
+resume: true
+gpus: (0,)
+
+train:
+    optim: 'adam'
+    lr: 1e-4
+    milestones: (80, 120)
+    gamma: 0.5
+    batch_size: 12
+    dataset: 'KhartoumTrain'
+    num_workers: 4
+    epoch: 150
+test:
+    dataset: 'KhartoumVal'
+    batch_size: 1
+
+heads: {'ct_hm': 1, 'wh': 2}
+segm_or_bbox: 'segm'
+
+poly_num: 128
+input_size: [672, 672]
+is_stage: True
+stage:
+    num: 2
+    train_epoch: [60, 150]
+    iter: [0, 3]
+    batch_size: [12, 12]
